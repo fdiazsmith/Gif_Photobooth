@@ -101,10 +101,10 @@ void draw() {
     
   if  (gifRec) {
 
-    myGif.setDelay(100);
+    myGif.setDelay(300);
     myGif.addFrame();
     println("recording gif");
-    countDown(10,2);
+    countDown(8,2);
   }
 }
 
@@ -133,7 +133,7 @@ public void controlEvent(ControlEvent theEvent) {
     myGif = new GifMaker(this, gifName);
     myGif.setSize(640, 480);
     myGif.setRepeat(0);
-    myGif.setQuality(20);
+    myGif.setQuality(1);
     println(gifName);
     fill(255, 0, 0);
     ellipse(300, 300, 50, 50);
