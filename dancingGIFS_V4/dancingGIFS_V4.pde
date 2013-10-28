@@ -23,7 +23,7 @@ String gifName = "testName";
 
 long computerTime;
 long runningTime;
-long interval = 3000;
+long interval = 3;
 long lastTime;
 int countDown;
 //////////////////////////////////////////////////////////////////////////
@@ -90,14 +90,15 @@ void setup() {
 void draw() {
   background(84);
   fill(227);
-  rect(640,0,260,124);
+  noStroke();
+  rect(640,-2,260,124);
   
   
   
   if (video.available()) video.read();
   image(video, 0, 0);
-  //  commands();
-
+  
+    
   if  (gifRec) {
 
     myGif.setDelay(10);
@@ -135,19 +136,25 @@ public void controlEvent(ControlEvent theEvent) {
     fill(255, 0, 0);
     ellipse(300, 300, 50, 50);
 //    gifRec = true;
-//    countDown();
+countDown();
+
   }
 }
 
 
 void countDown(){
-  if (countDown >0){
   runningTime = millis();
   runningTime = runningTime/1000;
    countDown =  int((interval - ((millis()-lastTime)/1000)));
   println(countDown);
-  }
- else if (countDown <= 0) {
+  
+  fill(200,36,36);
+  textSize(18);
+  textAlign(CENTER);
+  text(countDown,500,80);
+  
+  
+ if (countDown <= 0) {
     gifRec = true;
     lastTime = millis();
   }
