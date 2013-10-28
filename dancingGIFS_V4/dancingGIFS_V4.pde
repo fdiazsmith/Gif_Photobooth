@@ -19,7 +19,7 @@ int signal  = 0;
 
 String textValue; 
 boolean gifRec =false;
- String gifName;
+ String gifName = "testName";
 
 void setup() {
   size(1080, 480);
@@ -103,6 +103,8 @@ public void controlEvent(ControlEvent theEvent) {
 if(theEvent.getController().isActive() == true){
    gifName = theEvent.getStringValue();
    gifName = gifName +".gif";
+     myGif = new GifMaker(this,gifName);
+        myGif.setSize(640,480);
    println(gifName);
   fill(255,0,0);
   ellipse(300,300,50,50);
@@ -124,8 +126,7 @@ void commands() {
         gifRec=true;
     }
     else if (key == 'q') {
-        myGif = new GifMaker(this,gifName);
-        myGif.setSize(640,480);
+      
     }
   }
 }
