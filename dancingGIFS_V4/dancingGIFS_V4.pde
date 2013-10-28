@@ -73,7 +73,7 @@ gui.addSlider("sliderA", 50, 255, 150,
 void draw() {
   if (video.available()) video.read();
   image(video, 0, 0);
-  commands();
+//  commands();
 
   if  (gifRec) {
     myGif.setDelay(10);
