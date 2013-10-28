@@ -23,7 +23,7 @@ String gifName = "testName";
 
 long computerTime;
 long runningTime;
-long interval = 3;
+//long interval = 3;
 long lastTime;
 int countDown;
 //////////////////////////////////////////////////////////////////////////
@@ -101,9 +101,10 @@ void draw() {
     
   if  (gifRec) {
 
-    myGif.setDelay(10);
+    myGif.setDelay(100);
     myGif.addFrame();
     println("recording gif");
+    countDown(10,2);
   }
 }
 
@@ -132,17 +133,19 @@ public void controlEvent(ControlEvent theEvent) {
     myGif = new GifMaker(this, gifName);
     myGif.setSize(640, 480);
     myGif.setRepeat(0);
+    myGif.setQuality(20);
     println(gifName);
     fill(255, 0, 0);
     ellipse(300, 300, 50, 50);
 //    gifRec = true;
-countDown();
+countDown(3,1);
 
   }
 }
 
 
-void countDown(){
+void countDown(int interval, int mode){
+  
   runningTime = millis();
   runningTime = runningTime/1000;
    countDown =  int((interval - ((millis()-lastTime)/1000)));
@@ -151,14 +154,21 @@ void countDown(){
   fill(200,36,36);
   textSize(18);
   textAlign(CENTER);
-  text(countDown,500,80);
+  text(countDown,700,80);
   
-  
+ if (mode == 1){
  if (countDown <= 0) {
     gifRec = true;
     lastTime = millis();
   }
-
+ } 
+ else if(mode == 2){
+    if (countDown <= 0) {
+    gifRec = false;
+    lastTime = millis();
+  }
+   
+ }
 }
 
 //void commands() {
