@@ -105,6 +105,7 @@ if(theEvent.getController().isActive() == true){
    gifName = gifName +".gif";
      myGif = new GifMaker(this,gifName);
         myGif.setSize(640,480);
+        myGif.setRepeat(0);
    println(gifName);
   fill(255,0,0);
   ellipse(300,300,50,50);
