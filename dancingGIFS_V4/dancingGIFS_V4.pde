@@ -17,6 +17,8 @@ public int myColorRect = 200;
 public int myColorBackground = 100;
 int signal  = 0; 
 
+int valueSlider;
+
 String textValue; 
 boolean gifRec =false;
 String gifName = "testName";
@@ -32,7 +34,7 @@ int countDown;
 void setup() {
   size(900, 480);
   smooth(); 
-  //  findOtherCams();//leaving this one out for now because it takes to much time
+  findOtherCams();//leaving this one out for now because it takes to much time
   video = new Capture(this, 640, 480); 
   video.start();
   //fo'the GIF's
@@ -41,7 +43,7 @@ void setup() {
   PFont font = createFont("GillSans-48", 20);
   gui = new ControlP5(this);
 
-  gui.addSlider("sliderA", 50, 255, 150, 
+  gui.addSlider("sliderA", 300, 2000, 310, 
   740, 260, //this is the positioning
   100, 14);
   // add a vertical slider
@@ -71,7 +73,8 @@ void setup() {
     .setValue(128)
       .setPosition(730, 100)
         .updateSize()
-          ;      
+          ;  
+     
 }
 /* 
            ___           ___                       ___     
@@ -93,15 +96,17 @@ void draw() {
   noStroke();
   rect(640,-2,260,124);
   
-  
+   fill(200,36,36);
+  textSize(18);
+  textAlign(CENTER);
+  text(valueSlider,800,80);
   
   if (video.available()) video.read();
   image(video, 0, 0);
   
     
   if  (gifRec) {
-
-    myGif.setDelay(300);
+    myGif.setDelay(valueSlider);
     myGif.addFrame();
     println("recording gif");
     countDown(8,2);
@@ -125,6 +130,10 @@ public void stop(int theValue) {
   gifRec = false;
 }
 
+public void sliderA(int theValue) {
+  valueSlider = theValue;
+  println(theValue);
+}
 public void controlEvent(ControlEvent theEvent) {
   println(theEvent.getController().getName());
   if (theEvent.getController().isActive() == true) {
@@ -133,14 +142,31 @@ public void controlEvent(ControlEvent theEvent) {
     myGif = new GifMaker(this, gifName);
     myGif.setSize(640, 480);
     myGif.setRepeat(0);
-    myGif.setQuality(1);
+    myGif.setQuality(2);
     println(gifName);
     fill(255, 0, 0);
     ellipse(300, 300, 50, 50);
 //    gifRec = true;
-countDown(3,1);
 
+    countDown(3,1);
+//    introSlide();
   }
+  
+}
+
+void introSlide(){
+  fill(243);
+  noStroke();
+  rect(0,0,640,480);
+  fill(36);
+  textSize(58);
+  textAlign(CENTER);
+  String minusGif = gifName.substring( 0, gifName.length()-4 );
+  text(minusGif,320,240);
+  
+  myGif.setDelay(1300);
+  myGif.addFrame();
+   
 }
 
 
@@ -166,8 +192,7 @@ void countDown(int interval, int mode){
     if (countDown <= 0) {
     gifRec = false;
     lastTime = millis();
-  }
-   
+  } 
  }
 }
 

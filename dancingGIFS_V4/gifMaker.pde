@@ -39,11 +39,13 @@ public class GifMaker implements PConstants {
   public final static int DISPOSE_REMOVE = 3;
   public GifEncoder encoder; // i changed this to public
   private PApplet parent;
+  
 // i made this change/ 
-public GifMaker(PApplet parent) {
-    this.parent = parent;
-    parent.registerDispose(this);
-  }
+
+  public GifMaker(PApplet parent) {
+      this.parent = parent;
+      parent.registerDispose(this);
+    }
 
   public GifMaker(PApplet parent, String filename) {
     this.parent = parent;
